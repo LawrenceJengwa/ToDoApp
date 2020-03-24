@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#003B57</color>
+    <color name="colorPrimaryDark">#022B3E</color>
     <color name="colorAccent">#D81B60</color>
     <color name="light_grey">#D3D3D3</color>
     <color name="black">#000000</color>
+    <color name="dstv_blue">#2874A6</color>
+
+
 </resources>

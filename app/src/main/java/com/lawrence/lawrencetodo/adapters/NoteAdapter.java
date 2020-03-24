@@ -3,11 +3,16 @@ package com.lawrence.lawrencetodo.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.lawrence.lawrencetodo.MainActivity;
 import com.lawrence.lawrencetodo.R;
 import com.lawrence.lawrencetodo.db.Note;
 
@@ -54,14 +59,17 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
 
     class NoteHolder extends RecyclerView.ViewHolder {
         private TextView textViewTitle;
+        private CheckBox checkBox;
         private TextView textViewDescription;
         private TextView textViewPriority;
 
         public NoteHolder(View itemView) {
             super(itemView);
+            checkBox = itemView.findViewById(R.id.checkBox);
             textViewTitle = itemView.findViewById(R.id.text_view_title);
             textViewDescription = itemView.findViewById(R.id.text_view_description);
             textViewPriority = itemView.findViewById(R.id.text_view_priority);
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -69,6 +77,19 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
                     int position = getAdapterPosition();
                     if (listener != null && position != RecyclerView.NO_POSITION) {
                         listener.onItemClick(getItem(position));
+                    }
+                }
+            });
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    int size = getItemCount();
+                    int pos = getAdapterPosition();
+                    if (isChecked){
+                        MainActivity.showProgress();
+                    }
+                    if (!isChecked){
+                        MainActivity.resetProgress();
                     }
                 }
             });
@@ -82,4 +103,5 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
+
 }
