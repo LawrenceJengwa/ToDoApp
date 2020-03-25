@@ -1,4 +1,4 @@
-package com.lawrence.lawrencetodo;
+package com.lawrence.lawrencetodo.view;
 
 import android.content.Intent;
 import android.view.Menu;
@@ -9,6 +9,8 @@ import android.widget.NumberPicker;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.lawrence.lawrencetodo.R;
 
 public class AddEditNoteActivity extends AppCompatActivity {
 

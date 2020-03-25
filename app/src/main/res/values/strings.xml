@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">ToDoApp</string>
+    <string name="app_name">Lawrence ToDo</string>
+    <string name="todo_list">Todo List</string>
+    <string name="work_things_to_complete">Work Things to Complete</string>
+    <string name="to_do_title">TO DO</string>
+    <string name="done">Done</string>
+    <string name="percentage">%</string>
+    <string name="progress">Progress</string>
 </resources>

@@ -5,16 +5,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.lawrence.lawrencetodo.MainActivity;
 import com.lawrence.lawrencetodo.R;
 import com.lawrence.lawrencetodo.db.Note;
+
+import java.util.ArrayList;
+
+import static com.lawrence.lawrencetodo.view.MainActivity.showProgress;
 
 public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
     private OnItemClickListener listener;
@@ -62,6 +64,8 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
         private CheckBox checkBox;
         private TextView textViewDescription;
         private TextView textViewPriority;
+        ArrayList checkedItems = new ArrayList();
+        ArrayList<Integer> totalItems = new ArrayList<>();
 
         public NoteHolder(View itemView) {
             super(itemView);
@@ -83,13 +87,17 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    int size = getItemCount();
-                    int pos = getAdapterPosition();
-                    if (isChecked){
-                        MainActivity.showProgress();
-                    }
-                    if (!isChecked){
-                        MainActivity.resetProgress();
+                    int adapterPos = getAdapterPosition();
+                    int itemCount = getItemCount();
+                    totalItems.add(itemCount);
+                    if(isChecked) {
+                        checkedItems.add(adapterPos);
+                        if (checkedItems.size() == totalItems.size()){
+                            int progress = checkedItems.size()/totalItems.size() *100;
+                            showProgress(progress);
+                        }
+                    }else {
+                        checkedItems.remove(Integer.valueOf(adapterPos));
                     }
                 }
             });

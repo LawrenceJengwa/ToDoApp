@@ -1,4 +1,4 @@
-package com.lawrence.lawrencetodo;
+package com.lawrence.lawrencetodo.db;
 
 public class Model {
 

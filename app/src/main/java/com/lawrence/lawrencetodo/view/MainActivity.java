@@ -1,4 +1,4 @@
-package com.lawrence.lawrencetodo;
+package com.lawrence.lawrencetodo.view;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -16,13 +16,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.lawrence.lawrencetodo.R;
 import com.lawrence.lawrencetodo.adapters.NoteAdapter;
 import com.lawrence.lawrencetodo.db.Note;
 import com.lawrence.lawrencetodo.viewModel.NoteViewModel;
@@ -149,19 +149,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static void showProgress() {
+    public static void showProgress(int i) {
 
         final Handler handler = new Handler();
 
 
         new Thread(new Runnable() {
-            int status = 0;
+            int i = 0;
 
             @Override
             public void run() {
-                while (status < 100) {
+                while (i < 100) {
 
-                    status += 1;
+                    i += 1;
 
                     try {
                         Thread.sleep(200);
@@ -172,14 +172,11 @@ public class MainActivity extends AppCompatActivity {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            if (status < 100) {
-                                text.setProgress(status);
-                                text2.setText(status + "%");
-                            } else if (status == 0) {
-                                text.setProgress(0);
-                                text2.setText(String.valueOf(0));
-                            } else {
-                                text.setProgress(100);
+                            if (i < 100) {
+                                text.setProgress(i);
+                                text2.setText(i + "%");
+                            } else if (i == 100){
+                                text.setMax(100);
                                 text2.setText(String.valueOf(100));
                             }
                         }
