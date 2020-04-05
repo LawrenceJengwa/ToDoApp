@@ -92,8 +92,10 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
                     totalItems.add(itemCount);
                     if(isChecked) {
                         checkedItems.add(adapterPos);
-                        if (checkedItems.size() == totalItems.size()){
-                            int progress = checkedItems.size()/totalItems.size() *100;
+                        if (checkedItems.size() < totalItems.size()){
+                            showProgress(checkedItems.size()/totalItems.size() *100);
+                        } else if (checkedItems.size() == totalItems.size()){
+                            int progress = 100;
                             showProgress(progress);
                         }
                     }else {
